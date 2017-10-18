@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-GradientDescent.js') }}" ></script>
+<style>
+
+
+</style>
+<body>
+<div id="container">
+
+<!-- Navbar (sit on top) -->
+<div id="header">
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card-2" id="myNavbar">
+      <a href="index.php" class="w3-bar-item w3-button w3-wide">Machine Learning</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sidebar on small screens when clicking the menu icon -->
+  <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+    <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+  </nav>
+</div>
+
+<div id="body">
+  <div class="w3-container" style="padding:128px 16px">
+    <div class="w3-row">
+
+        <div class="w3-col l3 m12 w3-padding">
+          <a href="GradientDescent.html" style="text-decoration:none;"><div class="w3-card w3-cyan w3-btn" style="display:block">
+              <div class="w3-xlarge w3-padding-32 w3-center">
+                  Gradient Descent
+              </div>
+          </div></a>
+        </div>
+
+        <div class="w3-col l3 m12 w3-padding">
+          <a href="{{ url_for('normalization') }}" style="text-decoration:none;"><div class="w3-card w3-green w3-btn" style="display:block">
+              <div class="w3-xlarge w3-padding-32 w3-center">
+                  Normalization
+              </div>
+          </div></a>
+        </div>
+
+        <div class="w3-col l6 m12 w3-padding">
+          <a href="#" style="text-decoration:none;"><div class="w3-card w3-red w3-btn" style="display:block">
+              <div class="w3-xlarge w3-padding-32 w3-center">
+                  As I learn more Machine Learning, I'll post more stuff ...
+              </div>
+          </div></a>
+        </div>
+
+    </div>
+  </div>
+
+
+<!-- THIS IS WHERE THE MIAN BODY GOES-->
+<div class="w3-container">
+  <div class="w3-row" style="margin-top:-50px;">
+    <div class="w3-xxxlarge">
+      {{ vari }}
+    </div>
+    <p style="font-size:18px;">This is a simple linear regression model. Type in your inputs (X) and your outputs (Y), then click on run to compute a single iteration.<br>
+    If the error function starts to increase, (the line starts deviating away from the points), decrease your learning rate (alpha).<br>
+    Likewise, if the error function is decreasing too slowly, increase your learning rate.</p>
+  </div>
+  <div class="w3-row" style="padding-bottom:30px;">
+
+    <div class="w3-col l6 m12" style="height:430px; border-right:1px solid #CCCCCC;">
+      <div class="w3-padding">
+        <canvas id="myChart" style="width:100%; max-height:400px;"></canvas>
+      </div>
+    </div>
+
+    <div class="w3-col l6 m12">
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">X values</label>
+          </div>
+          <div class="w3-col l8 m8">
+            <input type="text" name="X" value="0, 1, 2, 3, 4, 5" class="w3-input" id="X-values" placeholder="Please input your x values, seperated by commas">
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">Y values</label>
+          </div>
+          <div class="w3-col l8 m8">
+            <input type="text" name="Y" value="4, 7, 10, 13, 16, 19" class="w3-input" id="Y-values" placeholder="Please input your x values, seperated by commas">
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">Learning Rate</label>
+          </div>
+          <div class="w3-col l8 m8">
+            <input type="text" name="alpha" value="0.005" class="w3-input" id="alpha" placeholder="Please type in your alpha value">
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">Current f(x)</label>
+          </div>
+          <div class="w3-col l8 m8 w3-padding">
+            f(x) = <div id="w0" style="display:inline-block;">0</div>&nbsp;&nbsp;+&nbsp;&nbsp;
+            <div id="w1" style="display:inline-block;">0</div>x
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">Current error function value</label>
+          </div>
+          <div class="w3-col l8 m8 w3-padding">
+            <div id="error" style="display:inline-block;">0</div>
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4 w3-padding">
+            <label class="w3-text">Iteration number</label>
+          </div>
+          <div class="w3-col l8 m8 w3-padding">
+            <div id="iteration-number" style="display:inline-block;">0</div>
+          </div>
+        </div>
+
+        <div class="w3-row w3-padding">
+          <div class="w3-col l4 m4">
+            <div style="padding-right:5px;">
+              <div id="run" class="w3-btn" style="width:100%; background-color:#1A85FF">Run 1 iteration</div>
+            </div>
+          </div>
+          <div class="w3-col l4 m4">
+            <div style="padding-right:5px;">
+              <div id="run-constant" class="w3-btn" style="width:100%; background-color:#1A85FF">Run continuously</div>
+            </div>
+          </div>
+          <div class="w3-col l4 m4">
+            <div style="padding-right:5px;">
+              <div id="reset" class="w3-btn w3-red" style="width:100%;">Reset</div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- Footer -->
+<div id="footer">
+  <div class="w3-center w3-black w3-padding">
+    <div class="w3-medium w3-section">
+      Made by Khalil Zaman
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<script>
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>

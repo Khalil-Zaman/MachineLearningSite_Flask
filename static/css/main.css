@@ -1,0 +1,40 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   line-height: 1.8;
+}
+
+body,h1,h2,h3,h4,h5,h6,p {font-family: "Raleway", sans-serif}
+
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+#header {
+   background:#ff0;
+}
+#body {
+   padding-bottom:75px;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:75px;   /* Height of the footer */
+   background:black;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
+}
+
+.up1{ position:relative; top:-1px; }
+.up2{ position:relative; top:-2px; }
+.up3{ position:relative; top:-3px; }
+.up4{ position:relative; top:-4px; }
+.up5{ position:relative; top:-5px; }
+.up6{ position:relative; top:-6px; }
+.up15{ position:relative; top:-15px; }
