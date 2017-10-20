@@ -1,0 +1,214 @@
+<div class="w3-row w3-content">
+  <div class="w3-col l12 m12" style="font-size:16px;">
+    <p>In the default example above, we have a set of inputs and outputs</p>
+    <div class="w3-center">
+      <p lang=latex>
+        (0, 4),\,(1, 7),\,(2, 10),\,(3, 13),\,(4, 16),\,(5, 19)
+      </p>
+    </div>
+    <p>We can denote this as</p>
+    <div class="w3-center">
+      <p lang="latex">
+        (x_1, y_1),\,(x_2, y_2),\,(x_3, y_3),\,(x_4, y_4),\,(x_5, y_5),\,(x_6, y_6)
+      </p>
+    </div>
+    <p>
+      For <span class="up2" lang=latex>x_1\,\epsilon\,\mathds{R},\, i=1, ..., n</span>. In this case, <span lang=latex class="up5"> n = 6</span>.
+    </p>
+    <p>In this regression model we assume that there will be a linear relaitonship between the inputs, <span class="up2" lang="latex">x_i</span>, and outputs, <span class="up1" lang="latex">y_i</span>.
+      Meaning <span class="up5" lang=latex>x</span> and <span lang=latex>y</span> will have a straight line relationship.</p>
+    <p>We know form school (hopefully) that  astraight line has the equation <span lang="latex">y = mx+c</span>. So we can say that the linear relationship is modelled by
+      <span lang="latex">f(x) = w_0 + w_1x_{i,1}</span>
+      Here, <span class="up2" lang=latex>w_0</span> and  <span class="up2" lang=latex>w_1</span> are the <span style="font-weight:900;">weights (parameters)</span> of our <span style="font-weight:900;">hypothesis</span>,  <span class="up2" lang=latex>f(x)</span>.
+    </p>
+    <p>The weights are what we iterate over and change, so our straight line fits the data better. So it doesn't really matter what we set the inital weights to. In this example, we'll set the weights to </p>
+    <div class="w3-center">
+      <p lang=latex>
+        w =
+      \begin{pmatrix}
+        w_0\\
+        w_1
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        0\\
+        0
+      \end{pmatrix}
+      </p>
+    </div>
+    <p>We can clean up our hypthesis by adding a bias term <span lang=latex class="up2">x_0</span> which equals <span class="up4" lang=latex>1</span>.</p>
+    <div class="w3-center">
+      <p lang=latex>f(x) = w_0x_{i,0} + w_1x_{i,1}</p>
+    </div>
+    <p>This can now be written in vector form</p>
+    <div class="w3-center">
+      <p lang=latex>
+        \begin{pmatrix}
+          x_{1,0} & x_{1,1} \\
+          x_{2,0} & x_{2,1} \\
+          x_{3,0} & x_{3,1} \\
+          x_{4,0} & x_{4,1} \\
+          x_{5,0} & x_{5,1} \\
+          x_{6,0} & x_{6,1}
+        \end{pmatrix}
+        \begin{pmatrix}
+          w_{0} \\
+          w_{1}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+          w_0x_{1,0} + w_1x_{1,1} \\
+          w_0x_{2,0} + w_1x_{2,1} \\
+          w_0x_{3,0} + w_1x_{3,1} \\
+          w_0x_{4,0} + w_1x_{4,1} \\
+          w_0x_{5,0} + w_1x_{5,1} \\
+          w_0x_{6,0} + w_1x_{6,1}
+        \end{pmatrix}
+        \newline
+      </p>
+    </div>
+    <div class="w3-center">
+      <p lang=latex>
+        f(x) = Xw
+      </p>
+    </div>
+    <p>In our example, this becomes </p>
+    <div class="w3-center">
+      <p lang=latex>
+        \begin{pmatrix}
+          1 & 0 \\
+          1 & 1 \\
+          1 & 2 \\
+          1 & 3 \\
+          1 & 4 \\
+          1 & 5
+        \end{pmatrix}
+        \begin{pmatrix}
+          0 \\
+          0
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+          0 \\
+          0 \\
+          0 \\
+          0 \\
+          0 \\
+          0
+        \end{pmatrix}
+      </p>
+    </div>
+
+    <div class="w3-center w3-xxlarge">
+      <p>The error function</p>
+    </div>
+    <p>As you can see from the matrix above, the current output from our hypothesis function is terrible. Our line, with our current weights, is bad. But how bad? </p>
+    <p>We need to define an error function to measure how well our line fits the data. We'd ideally like to adjust our weights to obtain the lowest error possible. The lower the value, the better the fit. In this model, we are using the least squarres error as an error function.</p>
+    <div class="w3-center">
+      <p lang=latex>
+        E(f(x), y) = \frac{1}{2}\sum_{i = 1}^{n}{(f(x_i)-y_i)^2}
+      </p>
+    </div>
+    <div class="w3-center">
+      <p lang="latex">
+        \frac{1}{2}
+        \left\lVert
+        \begin{pmatrix}
+          w_0x_{1,0} + w_1x_{1,1} \\
+          w_0x_{2,0} + w_1x_{2,1} \\
+          w_0x_{3,0} + w_1x_{3,1} \\
+          w_0x_{4,0} + w_1x_{4,1} \\
+          w_0x_{5,0} + w_1x_{5,1} \\
+          w_0x_{6,0} + w_1x_{6,1}
+        \end{pmatrix}
+        -
+        \begin{pmatrix}
+          y_1 \\
+          y_2 \\
+          y_3 \\
+          y_4 \\
+          y_5 \\
+          y_6
+        \end{pmatrix}
+        \right\rVert^2
+      </p>
+    </div>
+    <div class="w3-center">
+      <p lang="latex">
+        \frac{1}{2}
+        \left\lVert
+        Xw - y
+        \right\rVert^2
+      </p>
+    </div>
+    <p>The error function squares the difference of what our current hypothesis computes, <span lang=latex>f(X)</span> and the <span lang=latex>y</span> values. These sum of these values are then taken, and multiplied by a half (the half is put in as when differentiating the error function, it cancels out nicely with the square).</p>
+    <p>For our example, this would be</p>
+    <div class="w3-center">
+      <p lang="latex">
+        \frac{1}{2}
+        \left\lVert
+        \begin{pmatrix}
+          0 \\
+          0 \\
+          0 \\
+          0 \\
+          0 \\
+          0
+        \end{pmatrix}
+        -
+        \begin{pmatrix}
+          4 \\
+          7 \\
+          10 \\
+          13 \\
+          16 \\
+          19
+        \end{pmatrix}
+        \right\rVert^2
+        =
+        \frac{1}{2}(951) = 475.5
+      </p>
+    </div>
+    <p>We now have a way of measuring how well our hypothesis is doing, based upon our current selection of weights.</p>
+
+    <div class="w3-center w3-xxlarge">
+      <p>Gradient Descent</p>
+    </div>
+    We'd like to be able to tweak our weights slowly to try and achieve the minimum value for the error function. We could do this manually, however,
+    fortunately, we can write an algorithm to do it for us. This is the equation we're trying to optimize:
+    <div class="w3-center">
+      <p lang="latex">
+        \underset{w}{argmin}\left(\frac{1}{2}\sum_{i = 1}^{n}{(f_w(x_i)-y_i)^2}\right)
+      </p>
+    </div>
+    <p>We are altering the <span lang="latex" class="up5">w</span> argument to try and obtain the minimum value from the error function (the stuff inside the brackets).</p>
+    <p>We've seen above that the error function can be written in vector form, so now all we're trying to optimize, is</p>
+    <div class="w3-center">
+        <p lang="latex">\frac{1}{2}\left\lVert  Xw - y \right\rVert^2</p>
+    </div>
+    <p>Now, differentiating the above equation with respect to <span lang="latex" class="up5">w</span> gives us</p>
+    <div class="w3-center">
+      <p lang="latex">
+        X^T(Xw - y)
+      </p>
+      <p style="font-size:12px;">Note: <span lang="latex" class="up5">X^t</span> denotes the transpose of <span lang="latex" class="up5">X</span></p>
+    </div>
+    <p>
+      This differential gives us the gradient for the weights, at the values <span class="up5" lang="latex">w_0,\,w_1</span>.
+      We adjust the current values of <span class="up5" lang="latex">w_0,\,w_1</span> by subtracting a proportion <span style="font-weight:900">(learning rate)</span> of this gradient from the coressponding weight.</p>
+    <p> We now use this equation to update the weights in the direction of the negative of the gradient.</p>
+    <div class="w3-center">
+      <p lang="latex">
+        w_0 \leftarrow w_0 - \alpha(X^T(Xw - y))
+      </p>
+    </div>
+    <p>
+      The learning rate is something we define before hand (although, you can alter the learning rate in this implementation whilst the program is running). The choice of the learning rate is important.
+      As the algorithm iterates over <span class="up5" lang="latex">w</span>, the learning rate decides what proportion of the gradient is subtracted away from <span class="up5" lang="latex">w</span>.
+      If the learning rate that's too high, it ends up over shooting the minimum point and can end up increasing the error. However, a learning rate too small means that the algorithm will take longer to reach
+      the optimum value.</p>
+    <p>
+      Iterating over the function will eventually give us the line of best fit. One that produces the smallest error function.
+    </p>
+  </div>
+</div>

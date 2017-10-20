@@ -1,13 +1,13 @@
 <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">
-1
-2
-3
-4
-5
-6
-7
-8
-9
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 10
 11
 12
@@ -27,30 +27,8 @@
 26
 27
 28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">np</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">numpy.linalg</span> <span style="color: #66d9ef">import</span> <span style="color: #f8f8f2">inv</span>
+29</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">np</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">numpy.linalg</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">inv</span>
 
 <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">descent</span><span style="color: #f8f8f2">(X,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">w,</span> <span style="color: #f8f8f2">alpha):</span>
 <span style="color: #75715e"># Compute f(x)</span>
@@ -72,32 +50,10 @@
 <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">E</span>
 
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">cycle</span><span style="color: #f8f8f2">(input_data,</span> <span style="color: #f8f8f2">output_data,</span> <span style="color: #f8f8f2">min_delta</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">max_iteration</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">alpha</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0.05</span><span style="color: #f8f8f2">):</span>
-<span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">input_data</span>
-<span style="color: #f8f8f2">y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">output_data</span>
-
-<span style="color: #75715e"># WEIGHTS</span>
-<span style="color: #f8f8f2">w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">array([</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">w_temp</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">array([</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
-
-<span style="color: #75715e"># Append bias term to input data</span>
-<span style="color: #f8f8f2">bias</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ones(X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">array([bias,</span> <span style="color: #f8f8f2">X])</span>
-<span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">transpose()</span>
-
-<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">min_delta</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #f8f8f2">min_delta</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">10</span><span style="color: #f92672">**</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">)</span>
-
-<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">max_iteration</span> <span style="color: #f92672">!=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">max_iteration):</span>
-      <span style="color: #f8f8f2">w_temp</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">w</span>
-      <span style="color: #f8f8f2">w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">descent(X,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">w,</span> <span style="color: #f8f8f2">alpha)</span>
-      <span style="color: #f8f8f2">print(w)</span>
-      <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linalg</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">norm((w_temp</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">w))</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">min_delta:</span>
-          <span style="color: #66d9ef">break</span>
-<span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linalg</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">norm((w_temp</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">w))</span> <span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">min_delta:</span>
-      <span style="color: #f8f8f2">w_temp</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">w</span>
-      <span style="color: #f8f8f2">w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">descent(X,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">w,</span> <span style="color: #f8f8f2">alpha)</span>
-      <span style="color: #f8f8f2">print(w)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">normalize</span><span style="color: #f8f8f2">(X,</span> <span style="color: #f8f8f2">y):</span>
+    <span style="color: #f8f8f2">XtX</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dot(X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">transpose(),</span> <span style="color: #f8f8f2">X)</span>
+    <span style="color: #f8f8f2">inverse</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">inv(XtX)</span>
+    <span style="color: #f8f8f2">w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dot(inverse,</span> <span style="color: #f8f8f2">X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">transpose())</span>
+    <span style="color: #f8f8f2">w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dot(w,</span> <span style="color: #f8f8f2">y)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">w</span>
 </pre></td></tr></table></div>

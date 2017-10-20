@@ -38,3 +38,15 @@ body,h1,h2,h3,h4,h5,h6,p {font-family: "Raleway", sans-serif}
 .up5{ position:relative; top:-5px; }
 .up6{ position:relative; top:-6px; }
 .up15{ position:relative; top:-15px; }
+
+.choices:hover{
+  background-color:#ff8181;
+}
+
+.choices{
+  color:#232323;
+}
+
+.explanation{
+  display:none;
+}

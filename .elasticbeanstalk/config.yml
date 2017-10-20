@@ -2,6 +2,8 @@ branch-defaults:
   default:
     environment: megaenviron-t3
     group_suffix: null
+  master:
+    environment: megaenviron-t3
 global:
   application_name: mega-t1
   branch: null
