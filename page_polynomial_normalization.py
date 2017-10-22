@@ -23,16 +23,13 @@ def main():
     w = [float(number) for number in w]
     w = np.asarray(w)
 
-    # Add bias term
-    X = add_bias(X)
-
+    X = add_weights(X, w.shape[0])
 
     # Compute w = (Xt.X)-1
     w = normalize(X, y)
 
     f = np.dot(X,w)
-    f_display = [f[0],  f[len(f)-1]]
 
     error = error_function(y, f)
-    answer = jsonify(F = f_display, weights = w.tolist(), error = error)
+    answer = jsonify(F = f.tolist(), weights = w.tolist(), error = error)
     return answer

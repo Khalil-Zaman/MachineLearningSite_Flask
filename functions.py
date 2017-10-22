@@ -58,6 +58,27 @@ def normalize(X, y):
     w = np.dot(w, y)
     return w
 
+
+# Add bias term
+def add_bias(X):
+    bias = np.ones(X.shape[0])
+    X = np.array([bias, X])
+    X = X.transpose()
+    return X
+
+
+def add_weights(X, polynomial_order):
+    # Add bias term
+    bias = np.ones(X.shape[0])
+
+    # Add weights for polynomial terms
+    augmented_matrix = [bias]
+    for i in range(1, polynomial_order):
+        augmented_matrix = np.vstack((augmented_matrix, np.power(X, i)))
+    X = np.asarray(augmented_matrix)
+    X = X.transpose()
+    return X
+
 # INPUT DATA
 #X = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8])
 

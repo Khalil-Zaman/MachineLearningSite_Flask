@@ -1,6 +1,5 @@
 $(document).ready(function(){
-
-  draw_graph();
+  draw_graph([]);
 
   $('#reset').click(function(){
     $('#error').html(0);
@@ -16,6 +15,31 @@ $(document).ready(function(){
         $('#run').css('background-color', '#FF7105');
         runLR();
       }
+  });
+
+  $('#increase-poly').click(function(){
+    number = 0;
+    $('.weights').each(function(){
+      number++;
+    });
+    if (number == 0) $('.w').append('<div style="display:inline-block;"><div class="weights" style="display:inline-block;">0</div></div>');
+    else if (number == 1) $('.w').append('<div style="display:inline-block;">&nbsp;&nbsp;+&nbsp;&nbsp;<div class="weights" style="display:inline-block;">0</div>x</div>');
+    else $('.w').append('<div style="display:inline-block;">&nbsp;&nbsp;+&nbsp;&nbsp;<div class="weights" style="display:inline-block;">0</div>x<span style="font-size:10px; position:relative; bottom:5px;">'+number+'</span></div>');
+
+  });
+
+  $('#decrease-poly').click(function(){
+    number = 0;
+    $('.weights').each(function(){
+      number++;
+    });
+    delete_row = 0;
+    $('.weights').each(function(){
+      delete_row++;
+      if (delete_row == number){
+        $(this).parent().remove();
+      }
+    });
   });
 
 });
@@ -39,24 +63,26 @@ function runLR(){
   x = getXValue();
   w = getWValue();
   $.ajax({
-    url: '/run_normalize',
+    url: '/run_polynomial_normalize',
     data: {"W": w, "X": x, "Y": y},
     type: 'POST',
     success: function(data){
+
       $('#w0').html(data.weights[0]);
       $('#w1').html(data.weights[1]);
+      $('#w2').html(data.weights[2]);
+
+      number = 0;
+      $('.weights').each(function(){
+        $(this).html(data.weights[number]);
+        number++;
+      });
 
       $('#error').html(data.error);
 
       iteration_number = parseInt($('#iteration-number').html());
       $('#iteration-number').html(iteration_number+ 1);
-
-
-      lineY = data.F;
-      y0 = lineY[0];
-      yn = lineY[1];
-
-      draw_graph(y0, yn);
+      draw_graph(data.F);
     }
   }).done(function(){
     $('#run').html('Run');
@@ -67,7 +93,6 @@ function runLR(){
 
 function getXValue(){
   x = $('#X-values').val();
-
   return x;
 }
 
@@ -77,9 +102,12 @@ function getYValue(){
 }
 
 function getWValue(){
-  w0 = $('#w0').html();
-  w1 = $('#w1').html();
-  w = w0+","+w1;
+  w = "";
+  $('.weights').each(function(){
+    weight = $(this).html();
+    w += weight + ",";
+  });
+  w = w.slice(0, -1);
   return w;
 }
 
@@ -87,10 +115,7 @@ function getAValue(){
   return $('#alpha').val();
 }
 
-
-
-
-function draw_graph(y0, yn){
+function draw_graph(f){
   X = getXValue();
   X = X.split(",");
   Y = getYValue();
@@ -100,6 +125,14 @@ function draw_graph(y0, yn){
     data_xy.push({
       x: X[i],
       y: Y[i]
+    });
+  }
+
+  data_f = []
+  for (i = 0; i < f.length; i++){
+    data_f.push({
+      x: X[i],
+      y: f[i]
     });
   }
 
@@ -123,13 +156,13 @@ function draw_graph(y0, yn){
         backgroundColor: "rgb(123, 244, 123)",
         borderColor: "rgb(123, 244, 123)",
         fill: false,
-        data: [ {x: X[0], y: y0},
-                {x: X[X.length-1], y: yn}],
+        data: data_f,
       }]
     },
 
     // Configuration options go here
     options: {
+        bezierCurve : true,
         animation: false,
           scales: {
               xAxes: [{

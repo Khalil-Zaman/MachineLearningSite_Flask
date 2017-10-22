@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-Normalization.js') }}" ></script>
+<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-polynormal.js') }}" ></script>
 <script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-background.js') }}" ></script>
 <style>
 
@@ -24,7 +24,7 @@
 
 <div id="body" style="padding-top:100px;">
   <div class="w3-center" style="padding-bottom:50px; font-size:24px;">
-    Linear Regression
+    Polynomial Normalization
     <hr style="width:50%; margin:auto;">
   </div>
 
@@ -37,7 +37,7 @@
   <div class="w3-row" style="padding-bottom:30px;">
 
     <div class="w3-col l6 m12" style="height:430px; border-right:1px solid #CCCCCC;">
-      <div class="w3-padding">
+      <div class="w3-padding" class="chartcontainer">
         <canvas id="myChart" style="width:100%; max-height:400px;"></canvas>
       </div>
     </div>
@@ -49,7 +49,7 @@
             <label class="w3-text">X values</label>
           </div>
           <div class="w3-col l8 m8">
-            <input type="text" name="X" value="0, 1, 2, 3, 4, 5" class="w3-input" id="X-values" placeholder="Please input your x values, seperated by commas">
+            <input type="text" name="X" value="-3, -2, -1, 0, 1, 2, 3" class="w3-input" id="X-values" placeholder="Please input your x values, seperated by commas">
           </div>
         </div>
 
@@ -58,7 +58,7 @@
             <label class="w3-text">Y values</label>
           </div>
           <div class="w3-col l8 m8">
-            <input type="text" name="Y" value="4, 7, 10, 13, 16, 19" class="w3-input" id="Y-values" placeholder="Please input your x values, seperated by commas">
+            <input type="text" name="Y" value="9, 4, 1, 0, 1, 4, 9" class="w3-input" id="Y-values" placeholder="Please input your x values, seperated by commas">
           </div>
         </div>
 
@@ -67,8 +67,24 @@
             <label class="w3-text">Current f(x)</label>
           </div>
           <div class="w3-col l8 m8 w3-padding">
-            f(x) = <div id="w0" style="display:inline-block;">0</div>&nbsp;&nbsp;+&nbsp;&nbsp;
-            <div id="w1" style="display:inline-block;">0</div>x
+            f(x) =
+            <div class="w" style="display:inline-block;">
+              <div style="display:inline-block;"><div class="weights" style="display:inline-block;">0</div></div>
+              <div style="display:inline-block;">&nbsp;&nbsp;+&nbsp;&nbsp;<div class="weights" style="display:inline-block;">0</div>x</div>
+              <div style="display:inline-block;">&nbsp;&nbsp;+&nbsp;&nbsp;<div class="weights" style="display:inline-block;">0</div>x<span style="font-size:10px; position:relative; bottom:5px;">2</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="w3-row w3-padding">
+          <div style="padding-right:1px; display:inline-block">
+            <div class="w3-btn w3-teal" id="increase-poly">
+              Increase polynomial
+            </div>
+          </div>
+          <div style="padding-left:1px; display:inline-block;">
+            <div class="w3-btn w3-red" id="decrease-poly">
+              Decrease polynomial
+            </div>
           </div>
         </div>
 
@@ -108,7 +124,7 @@
   </div>
   <div class="w3-row code" style="padding-bottom:100px;">
     <div class="w3-col l12 m12">
-      {% include "code/code_normalization.html" %}
+      {% include "code/code_polynormal.html" %}
     </div>
   </div>
   <div class="w3-row explanation"  style="padding-bottom:100px;">

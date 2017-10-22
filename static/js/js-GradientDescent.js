@@ -146,7 +146,7 @@ function draw_graph(y0, yn){
         backgroundColor: "rgb(123, 244, 123)",
         borderColor: "rgb(123, 244, 123)",
         fill: false,
-        data: [ {x: 0, y: y0},
+        data: [ {x: X[0], y: y0},
                 {x: X[X.length-1], y: yn}],
       }]
     },

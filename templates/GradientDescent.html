@@ -22,44 +22,15 @@
 <!-- Navbar -->
 {% include "incs/navigation.html" %}
 
-<div id="body">
-  <div class="w3-container" style="padding:128px 16px">
-    <div class="w3-row">
-
-        <div class="w3-col l3 m12 w3-padding">
-          <a href="{{ url_for('gradient_descent') }}" style="text-decoration:none;"><div class="w3-card w3-cyan w3-btn" style="display:block">
-              <div class="w3-xlarge w3-padding-32 w3-center">
-                  Gradient Descent
-              </div>
-          </div></a>
-        </div>
-
-        <div class="w3-col l3 m12 w3-padding">
-          <a href="{{ url_for('normalization') }}" style="text-decoration:none;"><div class="w3-card w3-green w3-btn" style="display:block">
-              <div class="w3-xlarge w3-padding-32 w3-center">
-                  Normalization
-              </div>
-          </div></a>
-        </div>
-
-        <div class="w3-col l6 m12 w3-padding">
-          <a href="#" style="text-decoration:none;"><div class="w3-card w3-red w3-btn" style="display:block">
-              <div class="w3-xlarge w3-padding-32 w3-center">
-                  As I learn more Machine Learning, I'll post more stuff ...
-              </div>
-          </div></a>
-        </div>
-
-    </div>
+<div id="body" style="padding-top:100px;">
+  <div class="w3-center" style="padding-bottom:50px; font-size:24px;">
+    Gradient Descent
+    <hr style="width:50%; margin:auto;">
   </div>
-
 
 <!-- THIS IS WHERE THE MIAN BODY GOES-->
 <div class="w3-container">
   <div class="w3-row" style="margin-top:-50px;">
-    <div class="w3-xxxlarge">
-      {{ vari }}
-    </div>
     <p style="font-size:18px;">This is a simple linear regression model. Type in your inputs (X) and your outputs (Y), then click on run to compute a single iteration.<br>
     If the error function starts to increase, (the line starts deviating away from the points), decrease your learning rate (alpha).<br>
     Likewise, if the error function is decreasing too slowly, increase your learning rate.</p>
@@ -167,7 +138,7 @@
   </div>
   <div class="w3-row explanation"  style="padding-bottom:100px;">
     <div class="w3-col l12 m12" style="border:none; background-color:#f0f0f0">
-      {% include "incs/GradientDescent_wording.html" %}
+      {% include "incs/wordings/gradient_descent.html" %}
     </div>
   </div>
 
