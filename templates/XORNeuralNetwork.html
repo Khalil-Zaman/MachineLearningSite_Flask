@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-background.js') }}" ></script>
+<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/js-XORNeuralNetwork.js') }}" ></script>
+<script type = "text/javascript"  src="{{ url_for('static', filename = 'js/p5/p5/p5.js') }}"></script>
+<style>
+
+
+</style>
+<body>
+<div id="container">
+
+<!-- Navbar (sit on top) -->
+{% include "incs/navigation.html" %}
+
+<div id="body" style="padding-top:100px;">
+  <div class="w3-center" style="padding-bottom:50px; font-size:24px;">
+    Neural Network (XOR)
+    <hr style="width:50%; margin:auto;">
+  </div>
+
+
+<!-- THIS IS WHERE THE MIAN BODY GOES-->
+
+<div class="w3-container w3-center" style="padding-bottom:30px;">
+
+  <div class="w3-row">
+    <div class="w3-col l9 m12">
+      <div id="canvas-holder" style="margin:auto; height:452px; width:902px; border:1px solid #CCCCCC;"></div>
+    </div>
+
+    <div class="w3-container w3-col l3 m12">
+      <div class="w3-row">
+        <div class="w3-col l4 m4 w3-text w3-large" style="text-align:left">Inputs</div>
+        <div class="w3-col l4 m4 w3-text w3-large" style="text-align:left">Outputs</div>
+        <div class="w3-col l4 m4 w3-text w3-large" style="text-align:left">NN Output</div>
+      </div>
+
+      <div class="w3-row">
+        <div class="w3-col l4 m4" style="text-align:left">0 0</div>
+        <div class="w3-col l4 m4" style="text-align:left">0</div>
+        <div id="output1" class="w3-col l4 m4" style="text-align:left"></div>
+      </div>
+      <div class="w3-row">
+        <div class="w3-col l4 m4" style="text-align:left">0 1</div>
+        <div class="w3-col l4 m4" style="text-align:left">1</div>
+        <div id="output2" class="w3-col l4 m4" style="text-align:left"></div>
+      </div>
+      <div class="w3-row">
+        <div class="w3-col l4 m4" style="text-align:left">1 0</div>
+        <div class="w3-col l4 m4" style="text-align:left">1</div>
+        <div id="output3" class="w3-col l4 m4" style="text-align:left"></div>
+      </div>
+      <div class="w3-row">
+        <div class="w3-col l4 m4" style="text-align:left">1 1</div>
+        <div class="w3-col l4 m4" style="text-align:left">0</div>
+        <div id="output4" class="w3-col l4 m4" style="text-align:left"></div>
+      </div>
+
+      <div class="w3-row">
+        <div class="w3-col l6 m6 w3-large" style="text-align:left">Error</div>
+        <div id="error" class="w3-col l6 m6"></div>
+      </div>
+
+      <div class="w3-row">
+        <div class="w3-col l6 m6 w3-large" style="text-align:left">Iteration Number</div>
+        <div id="iteration" class="w3-col l6 m6">0</div>
+      </div>
+
+      <div class="w3-row" style="padding-top:10px; bottom:10px;">
+        <div class="w3-col l12 m12 w3-btn w3-green" id="run">Run</div>
+      </div>
+      <div class="w3-row" style="padding-top:10px; bottom:10px;">
+        <div class="w3-col l12m12 w3-btn w3-green" id="run-constant">Run continuously</div>
+      </div>
+      <!--<div class="w3-row" style="padding-top:10px; bottom:10px;">
+        <div class="w3-col l12m12 w3-btn w3-green" id="run-animation">Run animation</div>
+      </div>-->
+      <div class="w3-row" style="padding-top:10px; bottom:10px;">
+        <div class="w3-col l12m12 w3-btn w3-blue" id="reset">Reset</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- Footer -->
+<div id="footer">
+  <div class="w3-center w3-black w3-padding">
+    <div class="w3-medium w3-section">
+      Made by Khalil Zaman
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<script>
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>

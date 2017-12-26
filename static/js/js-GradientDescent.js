@@ -1,19 +1,15 @@
 $(document).ready(function(){
   draw_graph();
 
-  var it;
   $('#run-constant').click(function(){
       if (checkXY()) {
         if($(this).html() != "Pause"){
-          it = setInterval(function () {
-              runLR();
-          },500);
+          runContinuous()
           $(this).html("Pause");
           $(this).addClass("w3-red");
           $('#X-values').attr('disabled', true);
           $('#Y-values').attr('disabled', true);
         } else {
-          clearInterval(it);
           $(this).html("Continue");
           $(this).removeClass("w3-red");
           $(this).addClass("w3-green");
@@ -44,6 +40,7 @@ $(document).ready(function(){
 
 });
 
+// This function makes sure there are as many X values as Y values
 function checkXY(){
   X = getXValue();
   X = X.split(",");
@@ -55,6 +52,37 @@ function checkXY(){
     return false;
   }
   return true;
+}
+
+function runContinuous(){
+  y = getYValue();
+  x = getXValue();
+  w = getWValue();
+  a = getAValue();
+  $.ajax({
+    url: '/run_iteration',
+    data: {"W": w, "X": x, "Y": y, "A": a},
+    type: 'POST',
+    success: function(data){
+      $('#w0').html(data.weights[0]);
+      $('#w1').html(data.weights[1]);
+
+      $('#error').html(data.error);
+
+      iteration_number = parseInt($('#iteration-number').html());
+      $('#iteration-number').html(iteration_number+ 1);
+
+      lineY = data.F;
+      y0 = lineY[0];
+      yn = lineY[1];
+
+      draw_graph(y0, yn);
+    }
+  }).done(function(){
+    if ($('#run-constant').html() == "Pause"){
+      runContinuous()
+    }
+  });
 }
 
 function runLR(){
@@ -75,21 +103,16 @@ function runLR(){
         iteration_number = parseInt($('#iteration-number').html());
         $('#iteration-number').html(iteration_number+ 1);
 
-
         lineY = data.F;
         y0 = lineY[0];
         yn = lineY[1];
 
         draw_graph(y0, yn);
-
-
       }
     }).done(function(){
       $('#run').html('Run 1 iteration');
       $('#run').css('background-color', '#1A85FF');
     });
-
-
 }
 
 function getXValue(){

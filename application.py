@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 import page_gradientdescent, page_normalize, page_polynomial_normalization
+import page_XORNeuralNetwork
 
 application = Flask(__name__)
 
@@ -37,6 +38,16 @@ def normalization():
 @application.route('/run_normalize', methods=["POST"])
 def run_normalize():
     return page_normalize.main();
+
+
+
+@application.route('/XORNeuralNetwork')
+def XORNeuralNetwork():
+    return render_template('XORNeuralNetwork.html')
+
+@application.route('/run_XORNeuralNetwork', methods=["POST"])
+def run_XORNeuralNetwork():
+    return page_XORNeuralNetwork.main()
 
 
 
